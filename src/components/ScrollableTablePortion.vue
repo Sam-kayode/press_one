@@ -2,36 +2,46 @@
   <div class="scrollable">
     <table>
       <thead>
-        <tr>
-          <th v-for="headers in Object.keys(tableData[1])" :key="headers">
+        <TableRow>
+          <TableHeader v-for="headers in Object.keys(projectData[1])" :key="headers">
             {{ toTitleCase(headers) }}
-          </th>
-        </tr>
+          </TableHeader>
+        </TableRow>
       </thead>
       <tbody>
-        <tr>
-          <td>Data 2</td>
-          <td>Data 3</td>
-          <td>Data 4</td>
-          <td>Data 5</td>
-          <td>Data 5</td>
-          <td>Data 5</td>
-        </tr>
+        <TableRow v-for="project in projectData" :key="project">
+          <TableData v-for="(projectValues,index) in Object.values(project)" :key="index">
+            {{ projectValues }}
+          </TableData>
+        </TableRow>
       </tbody>
     </table>
   </div>
 </template>
 
 <script>
+import TableData from './TableData.vue'
+import TableRow from './TableRow.vue'
+import TableHeader from './TableHeader.vue'
 export default {
   props: {
-    tableData: {
+    projectData: {
       type: Array,
       default: () => []
+    }
+  },
+  components: { TableData, TableHeader, TableRow },
+  methods: {
+    toTitleCase(str) {
+      return str.replace(/_/g, ' ').replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+      })
     }
   }
 }
 </script>
 
-<style>
+<style scoped lang="scss">
+
+
 </style>

@@ -1,41 +1,13 @@
 <template>
   <div class="table-container">
-    <table class="static">
-      <thead>
-        <tr>
-          <th>Developer</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Row 1</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="scrollable">
-      <table>
-        <thead>
-          <tr>
-            <th v-for="headers in Object.keys(filteredData[1])" :key="headers">{{ toTitleCase(headers) }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Data 2</td>
-            <td>Data 3</td>
-            <td>Data 4</td>
-            <td>Data 5</td>
-            <td>Data 5</td>
-            <td>Data 5</td>
-          </tr>
-          <!-- Add more rows as needed -->
-        </tbody>
-      </table>
-    </div>
+    <StaticTablePortion :projectData="filteredHeader" />
+    <ScrollableTablePortion :projectData="filteredData"></ScrollableTablePortion>
   </div>
 </template>
 
 <script>
+import ScrollableTablePortion from './ScrollableTablePortion.vue'
+import StaticTablePortion from './StaticTablePortion.vue'
 export default {
   data() {
     return {
@@ -175,27 +147,16 @@ export default {
       ]
     }
   },
+  components: { ScrollableTablePortion, StaticTablePortion },
   computed: {
     filteredData() {
       return this.data.map((originalObject) => {
-        const {
-          project_name,
-          developer,
-          main_contractor,
-          area,
-          state,
-          status,
-          sector,
-          address,
-          region,
-          lga
-        } = originalObject
-
+        const { project_name, main_contractor, state, status, sector, address, region, lga } =
+          originalObject
         return {
           project_name,
-          developer,
           main_contractor,
-          area,
+          ['area']: region,
           state,
           status,
           sector,
@@ -204,17 +165,18 @@ export default {
           lga
         }
       })
-    }
-  },
-  methods: {
-    toTitleCase(str) {
-      return str.replace(/_/g, ' ').replace(/\w\S*/g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    },
+    filteredHeader() {
+      return this.data.map((originalObject) => {
+        const { developer } = originalObject
+        return {
+          developer
+        }
       })
     }
   }
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 </style>

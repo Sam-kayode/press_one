@@ -1,12 +1,12 @@
 <template>
-  <tr>
+  <td>
     <slot></slot>
-  </tr>
+  </td>
 </template>
-
-<script>
+  
+  <script>
 export default {}
 </script>
-
-<style scoped lang="scss">
+  
+  <style scoped lang="scss">
 </style>

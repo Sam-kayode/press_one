@@ -6,8 +6,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Row 1</td>
+      <tr v-for="(developer, index) in projectData" :key="index">
+        <td>{{ developer.developer }}</td>
       </tr>
     </tbody>
   </table>
@@ -16,7 +16,7 @@
 <script>
 export default {
   props: {
-    tableData: {
+    projectData: {
       type: Array,
       default: () => []
     }
@@ -24,5 +24,5 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 </style>
