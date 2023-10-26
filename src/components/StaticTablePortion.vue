@@ -25,4 +25,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.static {
+  width: 200px;
+  margin-right: -2px;
+  margin-top:-1px;
+
+  th{
+    border-radius:10px 0 0 0;
+
+  }
+
+}
 </style>

@@ -3,36 +3,14 @@
 body {
   display: flex;
   align-items: center;
-  // justify-content: center;
   width: 100vw;
-  // overflow-x: hidden ;
+  overflow-x: clip;
+  margin-top: 50px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.table-container {
-  display: flex;
-  overflow: auto;
-  width: 100vw;
-  padding: 10px 5%;
-}
-
-.static {
-  width: 200px;
-}
-
-.scrollable {
-  overflow-x: auto;
-}
-
-@media (max-width: 568px) {
-  .table-container {
-    width: fit-content;
-    padding: 20px;
-    margin: 0 auto;
-    overflow-x: auto;
-  }
-
-  .scrollable {
+@media(max-width:568px) {
+  body{
     overflow-x: auto;
   }
 }
@@ -40,6 +18,7 @@ body {
 tr:nth-child(odd) {
   background-color: rgb(243, 246, 252);
 }
+
 th {
   background-color: #091158e3;
   min-width: 150px;
@@ -53,13 +32,4 @@ th {
   white-space: nowrap;
   text-align: left;
   padding: 20px 30px;
-}
-/* Style the scrollable table */
-.scrollable table {
-  border-collapse: collapse;
-}
-
-.scrollable td {
-  white-space: nowrap;
-  padding: 28px 30px 21px 30px;
 }

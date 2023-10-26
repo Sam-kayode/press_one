@@ -10,7 +10,7 @@
       </thead>
       <tbody>
         <TableRow v-for="project in projectData" :key="project">
-          <TableData v-for="(projectValues,index) in Object.values(project)" :key="index">
+          <TableData v-for="(projectValues, index) in Object.values(project)" :key="index">
             {{ projectValues }}
           </TableData>
         </TableRow>
@@ -42,6 +42,29 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.scrollable {
+  overflow-x: auto;
+  border-radius: 0 10px 0 0;
 
 
+  table {
+    border-collapse: collapse;
+  }
+
+  td {
+    white-space: nowrap;
+    padding: 28px 30px 21px 30px;
+  }
+
+  &::-webkit-scrollbar {
+    height: 5px;
+    width: 70px;
+    background: rgb(234, 234, 234);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgb(160, 160, 160);
+    border-radius: 10px;
+  }
+}
 </style>

@@ -1,156 +1,30 @@
 <template>
-  <div class="table-container">
+  <div class="table-container" v-if="!this.loading && projects[1]">
     <StaticTablePortion :projectData="filteredHeader" />
     <ScrollableTablePortion :projectData="filteredData"></ScrollableTablePortion>
   </div>
+  <div v-if="loading">...loading</div>
 </template>
 
 <script>
 import ScrollableTablePortion from './ScrollableTablePortion.vue'
 import StaticTablePortion from './StaticTablePortion.vue'
+import axios from 'axios'
 export default {
   data() {
     return {
-      data: [
-        {
-          id: 1,
-          country: 'Togo',
-          developer: 'Kerluke, Howe and Hammes PLC',
-          project_name: 'Wuckert, Blanda and Crooks',
-          sector: 'Institutional/Public Sector',
-          address: '16 Mohr Street 36215 AdamVille',
-          region: 'SvenVille',
-          lga: 'KamronVille',
-          status: 'On hold',
-          main_contractor: 'Gleason Group and Sons',
-          architect: 'Macejkovic-Donnelly Inc',
-          quantity_surveyor: 'Weimann, Douglas and Mertz PLC',
-          structural_engineers: 'Turcotte, Sawayn and Hansen Group',
-          mep_engineer: 'Howell-Hermiston LLC',
-          project_manager: 'Reichert, Oberbrunner and Hettinger and Sons',
-          lift_contractor: 'Zemlak, Hane and Kutch and Sons',
-          bulk_earth_contractor: 'Kuvalis Inc Group',
-          other: null,
-          author: 1,
-          content_status: 'publish',
-          deleted_at: null,
-          created_at: '2019-12-10 17:28:33',
-          updated_at: '2019-12-10 17:28:33',
-          latitude: '-75.287715',
-          longitude: '63.447841',
-          est_range: '$3M - $46M',
-          state: 'Wyoming',
-          floors: 3,
-          elec_engineer: 'Towne PLC Ltd',
-          piling_contractor: "O'Connell Ltd and Sons",
-          legal_partners: 'Kutch-Watsica PLC'
-        },
-        {
-          id: 2,
-          country: 'Nigeria',
-          developer: 'Jacobs, Wiegand and Lind LLC',
-          project_name: 'Baumbach, Toy and Littel',
-          sector: 'Institutional/Public Sector',
-          address: '71 Dicki Street 00948 BettyeVille',
-          region: 'ArchibaldVille',
-          lga: 'GermanVille',
-          status: 'On hold',
-          main_contractor: 'Murray-Sanford LLC',
-          architect: 'Graham Group Group',
-          quantity_surveyor: 'Nitzsche Inc Group',
-          structural_engineers: 'Ruecker Ltd LLC',
-          mep_engineer: 'Muller, Block and Rau Group',
-          project_manager: 'Morar-Bode Inc',
-          lift_contractor: 'Quitzon LLC Inc',
-          bulk_earth_contractor: 'Ratke-Thiel LLC',
-          other: null,
-          author: 1,
-          content_status: 'publish',
-          deleted_at: null,
-          created_at: '2019-12-10 17:28:33',
-          updated_at: '2019-12-10 17:28:33',
-          latitude: '47.865983',
-          longitude: '-89.370544',
-          est_range: '$10M - $35M',
-          state: 'Hawaii',
-          floors: 7,
-          elec_engineer: 'Abernathy-Labadie Inc',
-          piling_contractor: 'Medhurst, Bauch and Homenick Inc',
-          legal_partners: 'White-Spencer Ltd'
-        },
-        {
-          id: 3,
-          country: 'Togo',
-          developer: 'Turner-Orn LLC',
-          project_name: 'Beatty-Mraz',
-          sector: 'Retail',
-          address: '96 Strosin Street 84731 GeneVille',
-          region: 'ReynaVille',
-          lga: 'CitlalliVille',
-          status: 'Site Clearing',
-          main_contractor: 'Lynch-Armstrong Inc',
-          architect: 'Fisher, Leffler and Jenkins and Sons',
-          quantity_surveyor: "Ratke, Ward and O'Reilly Inc",
-          structural_engineers: 'Gutmann Ltd LLC',
-          mep_engineer: 'Crist, Klein and Rutherford Ltd',
-          project_manager: "O'Reilly-Jacobi and Sons",
-          lift_contractor: 'Berge PLC LLC',
-          bulk_earth_contractor: 'Hilpert, Turcotte and Jacobson PLC',
-          other: null,
-          author: 1,
-          content_status: 'publish',
-          deleted_at: null,
-          created_at: '2019-12-10 17:28:33',
-          updated_at: '2019-12-10 17:28:33',
-          latitude: '23.414543',
-          longitude: '-143.497474',
-          est_range: '$7M - $22M',
-          state: 'Iowa',
-          floors: 5,
-          elec_engineer: 'Pollich-Waters Ltd',
-          piling_contractor: 'Roob Group PLC',
-          legal_partners: 'Zieme, Douglas and Bailey Inc'
-        },
-        {
-          id: 4,
-          country: 'Nigeria',
-          developer: 'Miller-Considine LLC',
-          project_name: 'Morissette PLC',
-          sector: 'Office',
-          address: '29 Brekke Street 48483 CollinVille',
-          region: 'ReynaVille',
-          lga: 'HarleyVille',
-          status: 'Completed',
-          main_contractor: 'Kozey, Hansen and Price LLC',
-          architect: 'Goodwin PLC Inc',
-          quantity_surveyor: 'Steuber-Reichel and Sons',
-          structural_engineers: 'Schoen-Rice Inc',
-          mep_engineer: 'White Inc LLC',
-          project_manager: 'Bernhard Inc LLC',
-          lift_contractor: 'Balistreri-Douglas PLC',
-          bulk_earth_contractor: 'Kessler and Sons PLC',
-          other: null,
-          author: 1,
-          content_status: 'publish',
-          deleted_at: null,
-          created_at: '2019-12-10 17:28:33',
-          updated_at: '2019-12-10 17:28:33',
-          latitude: '88.008399',
-          longitude: '103.65787',
-          est_range: '$3M - $47M',
-          state: 'North Dakota',
-          floors: 1,
-          elec_engineer: 'Greenfelder, Howe and Rippin Ltd',
-          piling_contractor: 'Oberbrunner and Sons Group',
-          legal_partners: 'Nikolaus, Gibson and Bradtke PLC'
-        }
-      ]
+      projects: [],
+      loading: false
     }
+  },
+  mounted() {
+    this.getProjects()
   },
   components: { ScrollableTablePortion, StaticTablePortion },
   computed: {
     filteredData() {
-      return this.data.map((originalObject) => {
+      this.projects
+      return this.projects.map((originalObject) => {
         const { project_name, main_contractor, state, status, sector, address, region, lga } =
           originalObject
         return {
@@ -167,16 +41,47 @@ export default {
       })
     },
     filteredHeader() {
-      return this.data.map((originalObject) => {
+      return this.projects.map((originalObject) => {
         const { developer } = originalObject
         return {
           developer
         }
       })
     }
+  },
+  methods: {
+    async getProjects() {
+      this.loading = true
+      try {
+        const response = await axios.get(
+          'https://70c5b72c-65db-4a66-ba01-3e14763157e8.mock.pstmn.io/'
+        )
+        this.projects = response.data.data
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
+      this.loading = false
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.table-container {
+  display: flex;
+  overflow-x: auto;
+  width: 100vw;
+  padding: 10px 5% 50px 5%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
+}
+
+@media (max-width: 568px) {
+  .table-container {
+    width: fit-content;
+    padding: 20px;
+    margin: 0 auto;
+    overflow-x: auto;
+  }
+}
 </style>
