@@ -11,8 +11,14 @@
 export default {}
 </script>
 
-<style>
-.loader-animation{
-
+<style lang="scss">
+.loader-animation {
+  display:flex;
+  width:100vw;
+  align-items: center;
+  margin-top:100px;
+  img {
+    margin: auto;
+  }
 }
 </style>

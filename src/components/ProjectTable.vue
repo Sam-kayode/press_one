@@ -1,9 +1,9 @@
 <template>
-  <!-- <div class="table-container" v-if="!this.loading && projects[1]">
+  <div class="table-container" v-if="!this.loading && projects[1]">
     <StaticTablePortion :projectData="filteredHeader" />
     <ScrollableTablePortion :projectData="filteredData"></ScrollableTablePortion>
-  </div> -->
-  <div v-if="!loading">
+  </div>
+  <div v-if="loading">
     <LoaderAnimation />
   </div>
 </template>
