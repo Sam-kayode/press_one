@@ -1,14 +1,17 @@
 <template>
-  <div class="table-container" v-if="!this.loading && projects[1]">
+  <!-- <div class="table-container" v-if="!this.loading && projects[1]">
     <StaticTablePortion :projectData="filteredHeader" />
     <ScrollableTablePortion :projectData="filteredData"></ScrollableTablePortion>
+  </div> -->
+  <div v-if="!loading">
+    <LoaderAnimation />
   </div>
-  <div v-if="loading">...loading</div>
 </template>
 
 <script>
 import ScrollableTablePortion from './ScrollableTablePortion.vue'
 import StaticTablePortion from './StaticTablePortion.vue'
+import LoaderAnimation from './LoaderAnimation.vue'
 import axios from 'axios'
 export default {
   data() {
@@ -20,7 +23,7 @@ export default {
   mounted() {
     this.getProjects()
   },
-  components: { ScrollableTablePortion, StaticTablePortion },
+  components: { ScrollableTablePortion, StaticTablePortion, LoaderAnimation },
   computed: {
     filteredData() {
       this.projects
