@@ -1,7 +1,5 @@
 <template>
-  <div>
     <ProjectTable />
-  </div>
 </template>
 
 <script>
@@ -10,5 +8,3 @@ export default {
   components: { ProjectTable }
 }
 </script>
-<style scoped>
-</style>X
